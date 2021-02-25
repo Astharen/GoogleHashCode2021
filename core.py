@@ -12,4 +12,8 @@ car_time_order = arg_order_time(car_time_list)
 print(car_time_list)
 print(car_time_order)
 
+for ord_index in car_time_order:
+    car_nodes = car_list[ord_index]
+
+
 # output_file(intersect_list, dict_dict_streets, dict_order_streets)
