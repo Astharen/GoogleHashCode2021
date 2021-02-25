@@ -30,17 +30,26 @@ def generate_street_graph(streets):
     # Devuelve:
     #   - Grafo de calles: {interseccion_inicio: {interseccion_final: [nombre_calle, duración_calle]}}
     #   - Diccionario intersecciones: {intersección: [lista_de_calles_de_entrada]}
+    #   - Diccionario calles: {nombre_calle: intersección_final}
     graph = {}
     intersections_dict = {}
+    streets_dict = {}
     for street in streets:
+        name = street.get('name')
         begin, end = street.get('begin'), street.get('end')
-        value = [street.get('name'), street.get('time')]
+        value = [name, street.get('time')]
         graph_node = graph.get(begin, {})
         graph_node[end] = value
         graph[begin] = graph_node
-        intersections_dict[end] = intersections_dict.get(end, []) + [street.get('name')]
-    return graph, intersections_dict
+        intersections_dict[end] = intersections_dict.get(end, []) + [name]
+        streets_dict[name] = end
+    return graph, intersections_dict, streets_dict
+
+def generate_cars_path(cars, streets_dict):
+    return list(map(lambda x: list(map(streets_dict.get, x)), cars))
 
 
-total_duration, total_intersections, bonus_points, streets, cars = read_file('d.txt')
-print(generate_street_graph(streets))
+
+total_duration, total_intersections, bonus_points, streets, cars = read_file('a.txt')
+graph, intersections_dict, streets_dict = generate_street_graph(streets)
+print(generate_cars_path(cars, streets_dict))
