@@ -47,9 +47,3 @@ def generate_street_graph(streets):
 
 def generate_cars_path(cars, streets_dict):
     return list(map(lambda x: list(map(streets_dict.get, x)), cars))
-
-
-
-total_duration, total_intersections, bonus_points, streets, cars = read_file('a.txt')
-graph, intersections_dict, streets_dict = generate_street_graph(streets)
-print(generate_cars_path(cars, streets_dict))

@@ -1,7 +1,7 @@
-def output_file(intersect_list, dict_dict_streets, dict_order_streets):
-    initialize_output()
+def output_file(intersect_list, dict_dict_streets, dict_order_streets, of='output.txt'):
+    initialize_output(of)
     first_line = len(intersect_list)
-    write_line(first_line)
+    write_line(first_line, of)
 
     for intersect_name in intersect_list:
         dict_streets = dict_dict_streets[intersect_name]
@@ -18,20 +18,20 @@ def write_each_intersect(intersect_name, dict_streets, order_streets, intersect_
         else:
             street_name = order_streets[i-2]
             var = street_name + ' ' + str(dict_streets[street_name])
-        write_line(var)
+        write_line(var, of)
 
 
-def write_line(var):
-    with open('output.txt', 'a') as file:
+def write_line(var, of):
+    with open(of, 'a') as file:
         file.write(f'{var}\n')
 
 
-def initialize_output():
-    with open('output.txt', 'w') as file:
+def initialize_output(of):
+    with open(of, 'w') as file:
         file.write('')
 
 
-intersect_list = [0, 1]
-dict_dict_streets = {0:{'ab':3, 'ba':4, 'ca':3}, 1:{'ab':3, 'ba':4, 'ca':3}}
-dict_order_streets = {0:['ab', 'ca', 'ba'], 1:['ab', 'ca', 'ba']}
-output_file(intersect_list, dict_dict_streets, dict_order_streets)
+# intersect_list = [0, 1]
+# dict_dict_streets = {0:{'ab':3, 'ba':4, 'ca':3}, 1:{'ab':3, 'ba':4, 'ca':3}}
+# dict_order_streets = {0:['ab', 'ca', 'ba'], 1:['ab', 'ca', 'ba']}
+# output_file(intersect_list, dict_dict_streets, dict_order_streets)
