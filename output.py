@@ -1,15 +1,19 @@
-def output_file(intersect_list, dict_dict_streets, dict_order_streets, of='output.txt'):
-    initialize_output(of)
+def output_file(intersect_list, dict_dict_streets, dict_order_streets, letter):
+    # initialize_output(letter)
+    text = ''
     first_line = len(intersect_list)
-    write_line(first_line, of)
+    text = write_all_output(text, first_line)
+    # write_line(first_line, letter)
 
     for intersect_name in intersect_list:
         dict_streets = dict_dict_streets[intersect_name]
         order_streets = dict_order_streets[intersect_name]
-        write_each_intersect(intersect_name, dict_streets, order_streets, intersect_name)
+        text = write_each_intersect(intersect_name, dict_streets, order_streets, intersect_name, text)
+    
+    write_txt(text, letter)
 
 
-def write_each_intersect(intersect_name, dict_streets, order_streets, intersect_id):
+def write_each_intersect(intersect_name, dict_streets, order_streets, intersect_id, text):
     for i in range(2+len(order_streets)):
         if i == 0:
             var = intersect_id
@@ -18,16 +22,27 @@ def write_each_intersect(intersect_name, dict_streets, order_streets, intersect_
         else:
             street_name = order_streets[i-2]
             var = street_name + ' ' + str(dict_streets[street_name])
-        write_line(var, of)
+        # write_line(var, letter)
+        text = write_all_output(text, var)
+    return text
+
+def write_all_output(text, var):
+    text += f'{var}\n'
+    return text
 
 
-def write_line(var, of):
-    with open(of, 'a') as file:
+def write_txt(text, letter):
+    with open(f'output{letter}.txt', 'w') as file:
+        file.write(text)
+
+
+def write_line(var, letter):
+    with open(f'output{letter}.txt', 'a') as file:
         file.write(f'{var}\n')
 
 
-def initialize_output(of):
-    with open(of, 'w') as file:
+def initialize_output(letter):
+    with open(f'output{letter}.txt', 'w') as file:
         file.write('')
 
 
