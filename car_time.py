@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def car_time(car_nodes_list, graph):
 
     time = 0
@@ -19,3 +22,7 @@ def all_car_time(car_list, graph):
         car_time_list.append(car_time(car_nodes_list, graph))
     
     return car_time_list
+
+
+def arg_order_time(car_time_list):
+    return np.argsort(car_time_list)
