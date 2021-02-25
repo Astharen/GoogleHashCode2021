@@ -2,10 +2,10 @@
 def process_street(street):
     props = street.split()
     return {
-        'begin': props[0],
-        'end': props[1],
+        'begin': int(props[0]),
+        'end': int(props[1]),
         'name': props[2],
-        'time': props[3]
+        'time': int(props[3])
     }
 
 def read_file(path):
