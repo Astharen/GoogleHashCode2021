@@ -16,13 +16,22 @@ def main(file_input, file_output):
     dict_order_streets = {}
     for i in car_time_order:
         car = cars_path[i]
-        intersect_list = car[:-1]
-        for j, intersection in enumerate(intersect_list):
-            dict_dict_streets[intersection] = {cars[i][j]: total_duration}
-            dict_order_streets[intersection] = [cars[i][j]]
-        break
+        iintersect_list = car[:-1]
+        # if len(set(intersect_list + iintersect_list)) != len(intersect_list + iintersect_list):
+        #     continue
+        intersect_list = list(set(iintersect_list + intersect_list))
+        for j, intersection in enumerate(iintersect_list):
+            print(f"{100*i/len(car_time_order)}        {100*j/len(iintersect_list)}")
+            cdict = dict_dict_streets.get(intersection, {})
+            if cars[i][j] not in cdict.keys():
+                cdict[cars[i][j]] = 1
+            dict_dict_streets[intersection] = cdict
+            clist = dict_order_streets.get(intersection, [])
+            if cars[i][j] not in clist:
+                clist.append(cars[i][j])
+            dict_order_streets[intersection] = clist
 
-    output_file(intersect_list, dict_dict_streets, dict_order_streets, of)
+    output_file(intersect_list, dict_dict_streets, dict_order_streets, file_output)
     return car_times_list
 
 
@@ -31,6 +40,6 @@ def main(file_input, file_output):
 
 
 if __name__ == '__main__':
-    fi = sys.argv[1]
-    fo = f"{fi[:-4]}_output.txt"
-    print(main(fi, fo))
+    fis = sys.argv[1:]
+    for fi in fis:
+        main(fi, f"{fi[:-4]}_output.txt")

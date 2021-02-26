@@ -127,3 +127,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+a_output.txt
+b.txt
+b_output.txt
+c.txt
+c_output.txt
+d.txt
+d_output.txt
+e.txt
+e_output.txt
+f.txt
+f_output.txt
+GoogleHashCode2021.zip
